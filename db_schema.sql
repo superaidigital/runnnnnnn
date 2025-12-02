@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2025 at 08:57 AM
+-- Generation Time: Dec 02, 2025 at 09:41 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pao_run_db`
+-- Database: `pao_run_db2`
 --
 
 -- --------------------------------------------------------
@@ -48,7 +48,7 @@ INSERT INTO `distances` (`id`, `event_id`, `name`, `price`, `category`, `bib_col
 (75, 1, '15 KM', 599.00, 'Mini Marathon', '#4f46e5', NULL, 1, 4, NULL),
 (76, 1, '5 KM', 399.00, 'Fun Run', '#4f46e5', NULL, 1, 4, NULL),
 (77, 1, '5 KM', 399.00, 'ปั่นจักรยานถวายเป็นพระราชกุศล', '#4f46e5', NULL, 1, 4, NULL),
-(83, 2, '5 KM', 399.00, 'ปั่นจักรยานถวายเป็นพระราชกุศล', '#4f46e5', NULL, 1, 4, NULL);
+(87, 2, '5 KM', 399.00, 'ปั่นจักรยานถวายเป็นพระราชกุศล', '#4f46e5', NULL, 1, 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,16 +94,18 @@ CREATE TABLE `events` (
   `bib_next_number` int(11) DEFAULT NULL COMMENT 'เลข BIB ลำดับถัดไปที่จะใช้',
   `corral_settings` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'การตั้งค่ากลุ่มปล่อยตัว' CHECK (json_valid(`corral_settings`)),
   `payment_deadline` datetime DEFAULT NULL COMMENT 'วันหมดเขตการชำระเงิน',
-  `bib_background_url` text DEFAULT NULL COMMENT 'Path to custom BIB background image'
+  `bib_background_url` text DEFAULT NULL COMMENT 'Path to custom BIB background image',
+  `merch_link` text DEFAULT NULL COMMENT 'ลิงก์สำหรับสั่งซื้อเสื้อ',
+  `merch_enabled` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=ปิด, 1=เปิด ปุ่มสั่งซื้อเสื้อ'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `event_code`, `name`, `slogan`, `theme_color`, `color_code`, `logo_text`, `is_visible`, `is_cancelled`, `sort_order`, `is_registration_open`, `organizer`, `organizer_phone`, `organizer_email`, `organizer_line_id`, `organizer_logo_url`, `contact_person_name`, `contact_person_phone`, `payment_bank`, `payment_account_name`, `payment_account_number`, `payment_qr_code_url`, `enable_shipping`, `shipping_cost`, `start_date`, `cover_image_url`, `card_thumbnail_url`, `map_embed_url`, `map_direction_url`, `description`, `awards_description`, `bib_prefix`, `bib_start_number`, `bib_padding`, `bib_next_number`, `corral_settings`, `payment_deadline`, `bib_background_url`) VALUES
-(1, 'sskpa-run-25', 'kokphet Run For Love 2026', 'รักสุขภาพ รักตนเอง รักครอบครัว รักชุมชน รักสังคมและสิ่งแวดล้อม', 'indigo', '#4f46e5', 'SSKPAO RUN 🏃‍♀️', 1, 0, 2, 1, 'รพ.สต.บ้านโคกเพชร', '045-888-999', 'ssk-pao@run.com', '@sskpaorun', 'uploads/sskpa-run-25/organizer/organizer_68f729c73fa4d.png', 'นางสาวรุจิกาญจน์ อสิพงษ์(ฝ่ายทะเบียน)', '087-9617951', 'เพื่อการเกษตรและสหกรณ์การเกษตร', 'เงินบำรุง รพ.สต.บ้านโคกเพชร', '012392939172', 'uploads/sskpa-run-25/payment/payment_691b30643cf4e.jpg', 1, 50.00, '2026-01-18 05:00:00', 'uploads/sskpa-run-25/cover/cover_690d77642ab56.png', 'uploads/sskpa-run-25/cover/cover_690d77642af6e.png', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.375005898851!2d104.3005556!3d15.1111111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311a2f5f5c5b4e3d%3A0x8c5b1b4b1a4a4b1c!2sSisaket%20Provincial%20Stadium!5e0!3m2!1sen!2sth!4v1678888888888!5m2!1sen!2sth', 'https://maps.google.com/?q=Sisaket+Provincial+Stadium', '<p><em><strong>&nbsp;วันเสาร์ที่ 17 มกราคม 2569&nbsp; ปั่นจักรยานถวายเป็นพระราชกุศล</strong></em></p>\r\n\r\n<p><em><strong>&nbsp;วันอาทิตย์ที่ 18 มกราคม 2569 </strong></em></p>\r\n\r\n<p><em><strong>&nbsp; การแข่งขัน 2 ประเภท Fun Run ระยะทาง&nbsp; 5 กม. และ&nbsp;</strong></em><strong><em>Mini marathon ระยะทาง 15 กม.&nbsp;</em></strong><strong>ประเภทรุ่นในการแข่งขัน แยกชาย/หญิง </strong></p>\r\n\r\n<p>อายุไม่เกิน 19 ปี&nbsp; อายุไม่เกิน 29 ปี</p>\r\n\r\n<p>อายุไม่เกิน 39 ปี อายุไม่เกิน 49 ปี</p>\r\n\r\n<p>อายุไม่เกิน 59 ปี อายุ 60 ปีขึ้นไป</p>\r\n\r\n<p>Fancy รวม</p>\r\n', '<p><em><strong>Fun Run ระยะทาง&nbsp; 5 กม. เงินรางวัล 500 บาท 300 บาท 200 บาท พร้อมเกียรติบัตร</strong></em></p>\r\n\r\n<p><strong><em>Mini marathon ระยะทาง 15 กม. เงินรางวัล 1000 บาท 600 บาท 400 บาท พร้อมเกียรติบัตร</em></strong></p>\r\n\r\n<p><strong><em>Fancy รวม 8 รางวัลๆละ 500 บาท</em></strong></p>\r\n\r\n<p><strong>(สมัครวิ่งได้เหรียญทุกคน -ชนะเลิศ 1-2-3 ได้เงินรางวัลพร้อมเกียรติบัตร)</strong></p>\r\n', '0', 1, 4, 6, '[{\"name\":\"A\",\"from_bib\":\"\",\"to_bib\":\"\",\"color\":\"#3b82f6\",\"time\":\"04:00\",\"description\":\"\"},{\"name\":\"B\",\"from_bib\":\"\",\"to_bib\":\"\",\"color\":\"#f7d83b\",\"time\":\"05:00\",\"description\":\"\"},{\"name\":\"C\",\"from_bib\":\"\",\"to_bib\":\"\",\"color\":\"#87380d\",\"time\":\"\",\"description\":\"\"}]', '2025-12-10 00:00:00', NULL),
-(2, 'mountain-trail-challenge-25', 'ปั่นจักรยานถวายเป็นพระราชกุศล', 'รักสุขภาพ รักตนเอง รักครอบครัว รักชุมชน รักสังคมและสิ่งแวดล้อม', 'green', '#10b981', 'TRAIL CHALLENGE ⛰️', 1, 0, 1, 1, 'รพ.สต.บ้านโคกเพชร', '090-555-4444', 'trail@run.com', '@thaitrail', 'uploads/mountain-trail-challenge-25/organizer/organizer_691c257275d31.png', 'นางสาวรุจิกาญจน์ อสิพงษ์(ฝ่ายทะเบียน)', '087-9617951', 'เพื่อการเกษตรและสหกรณ์การเกษตร', 'เงินบำรุง รพ.สต.บ้านโคกเพชร', '012392939172', 'uploads/mountain-trail-challenge-25/payment/payment_691c25727e9e7.jpg', 0, 50.00, '2026-01-17 06:00:00', 'https://placehold.co/800x300/10b981/ffffff?text=Mountain+Trail+Cover', 'https://placehold.co/400x150/10b981/ffffff?text=Mountain+Trail+Card', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.375005898851!2d104.3005556!3d15.1111111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311a2f5f5c5b4e3d%3A0x8c5b1b4b1a4a4b1c!2sSisaket%20Provincial%20Stadium!5e0!3m2!1sen!2sth!4v1678888888888!5m2!1sen!2sth', 'https://maps.google.com/?q=Sisaket+Provincial+Stadium', '<p><em><strong>วันเสาร์ที่ 17 มกราคม 2569&nbsp; ปั่นจักรยานถวายเป็นพระราชกุศล</strong></em></p>\r\n', '', '0', 1, 4, 1, NULL, '2025-11-30 00:30:00', NULL);
+INSERT INTO `events` (`id`, `event_code`, `name`, `slogan`, `theme_color`, `color_code`, `logo_text`, `is_visible`, `is_cancelled`, `sort_order`, `is_registration_open`, `organizer`, `organizer_phone`, `organizer_email`, `organizer_line_id`, `organizer_logo_url`, `contact_person_name`, `contact_person_phone`, `payment_bank`, `payment_account_name`, `payment_account_number`, `payment_qr_code_url`, `enable_shipping`, `shipping_cost`, `start_date`, `cover_image_url`, `card_thumbnail_url`, `map_embed_url`, `map_direction_url`, `description`, `awards_description`, `bib_prefix`, `bib_start_number`, `bib_padding`, `bib_next_number`, `corral_settings`, `payment_deadline`, `bib_background_url`, `merch_link`, `merch_enabled`) VALUES
+(1, 'sskpa-run-25', 'kokphet Run For Love 2026', 'รักสุขภาพ รักตนเอง รักครอบครัว รักชุมชน รักสังคมและสิ่งแวดล้อม', 'indigo', '#4f46e5', 'SSKPAO RUN 🏃‍♀️', 1, 0, 2, 1, 'รพ.สต.บ้านโคกเพชร', '045-888-999', 'ssk-pao@run.com', '@sskpaorun', 'uploads/sskpa-run-25/organizer/organizer_68f729c73fa4d.png', 'นางสาวรุจิกาญจน์ อสิพงษ์(ฝ่ายทะเบียน)', '087-9617951', 'เพื่อการเกษตรและสหกรณ์การเกษตร', 'เงินบำรุง รพ.สต.บ้านโคกเพชร', '012392939172', 'uploads/sskpa-run-25/payment/payment_691b30643cf4e.jpg', 1, 50.00, '2026-01-18 05:00:00', 'uploads/sskpa-run-25/cover/cover_690d77642ab56.png', 'uploads/sskpa-run-25/cover/cover_690d77642af6e.png', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.375005898851!2d104.3005556!3d15.1111111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311a2f5f5c5b4e3d%3A0x8c5b1b4b1a4a4b1c!2sSisaket%20Provincial%20Stadium!5e0!3m2!1sen!2sth!4v1678888888888!5m2!1sen!2sth', 'https://maps.google.com/?q=Sisaket+Provincial+Stadium', '<p><em><strong>&nbsp;วันเสาร์ที่ 17 มกราคม 2569&nbsp; ปั่นจักรยานถวายเป็นพระราชกุศล</strong></em></p>\r\n\r\n<p><em><strong>&nbsp;วันอาทิตย์ที่ 18 มกราคม 2569 </strong></em></p>\r\n\r\n<p><em><strong>&nbsp; การแข่งขัน 2 ประเภท Fun Run ระยะทาง&nbsp; 5 กม. และ&nbsp;</strong></em><strong><em>Mini marathon ระยะทาง 15 กม.&nbsp;</em></strong><strong>ประเภทรุ่นในการแข่งขัน แยกชาย/หญิง </strong></p>\r\n\r\n<p>อายุไม่เกิน 19 ปี&nbsp; อายุไม่เกิน 29 ปี</p>\r\n\r\n<p>อายุไม่เกิน 39 ปี อายุไม่เกิน 49 ปี</p>\r\n\r\n<p>อายุไม่เกิน 59 ปี อายุ 60 ปีขึ้นไป</p>\r\n\r\n<p>Fancy รวม</p>\r\n', '<p><em><strong>Fun Run ระยะทาง&nbsp; 5 กม. เงินรางวัล 500 บาท 300 บาท 200 บาท พร้อมเกียรติบัตร</strong></em></p>\r\n\r\n<p><strong><em>Mini marathon ระยะทาง 15 กม. เงินรางวัล 1000 บาท 600 บาท 400 บาท พร้อมเกียรติบัตร</em></strong></p>\r\n\r\n<p><strong><em>Fancy รวม 8 รางวัลๆละ 500 บาท</em></strong></p>\r\n\r\n<p><strong>(สมัครวิ่งได้เหรียญทุกคน -ชนะเลิศ 1-2-3 ได้เงินรางวัลพร้อมเกียรติบัตร)</strong></p>\r\n', '0', 1, 4, 6, '[{\"name\":\"A\",\"from_bib\":\"\",\"to_bib\":\"\",\"color\":\"#3b82f6\",\"time\":\"04:00\",\"description\":\"\"},{\"name\":\"B\",\"from_bib\":\"\",\"to_bib\":\"\",\"color\":\"#f7d83b\",\"time\":\"05:00\",\"description\":\"\"},{\"name\":\"C\",\"from_bib\":\"\",\"to_bib\":\"\",\"color\":\"#87380d\",\"time\":\"\",\"description\":\"\"}]', '2025-12-10 00:00:00', NULL, NULL, 0),
+(2, 'mountain-trail-challenge-25', 'ปั่นจักรยานถวายเป็นพระราชกุศล', 'รักสุขภาพ รักตนเอง รักครอบครัว รักชุมชน รักสังคมและสิ่งแวดล้อม', 'green', '#10b981', 'TRAIL CHALLENGE ⛰️', 1, 0, 1, 1, 'รพ.สต.บ้านโคกเพชร', '090-555-4444', 'trail@run.com', '@thaitrail', 'uploads/mountain-trail-challenge-25/organizer/organizer_691c257275d31.png', 'นางสาวรุจิกาญจน์ อสิพงษ์(ฝ่ายทะเบียน)', '087-9617951', 'เพื่อการเกษตรและสหกรณ์การเกษตร', 'เงินบำรุง รพ.สต.บ้านโคกเพชร', '012392939172', 'uploads/mountain-trail-challenge-25/payment/payment_691c25727e9e7.jpg', 0, 50.00, '2026-01-17 06:00:00', 'uploads/mountain-trail-challenge-25/cover/cover_692e6949678c9.png', 'uploads/mountain-trail-challenge-25/cover/cover_692e6941b55e8.png', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.375005898851!2d104.3005556!3d15.1111111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311a2f5f5c5b4e3d%3A0x8c5b1b4b1a4a4b1c!2sSisaket%20Provincial%20Stadium!5e0!3m2!1sen!2sth!4v1678888888888!5m2!1sen!2sth', 'https://maps.google.com/?q=Sisaket+Provincial+Stadium', '<p><em><strong>วันเสาร์ที่ 17 มกราคม 2569&nbsp; ปั่นจักรยานถวายเป็นพระราชกุศล</strong></em></p>\r\n', '', '0', 1, 4, 2, NULL, '2025-11-30 00:30:00', NULL, 'https://forms.gle/SgPT92aS4VoiozEb6', 1);
 
 -- --------------------------------------------------------
 
@@ -364,13 +366,36 @@ CREATE TABLE `registrations` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `line_id` varchar(100) DEFAULT NULL,
-  `thai_id` varchar(13) NOT NULL,
+  `thai_id` varchar(20) NOT NULL,
   `birth_date` date DEFAULT NULL,
   `disease` varchar(255) DEFAULT 'ไม่มีโรคประจำตัว',
   `disease_detail` text DEFAULT NULL,
   `emergency_contact_name` varchar(255) DEFAULT NULL,
   `emergency_contact_phone` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `registrations`
+--
+
+INSERT INTO `registrations` (`id`, `registration_code`, `user_id`, `event_id`, `distance_id`, `race_category_id`, `bib_number`, `corral`, `shirt_size`, `shipping_option`, `shipping_address`, `status`, `payment_slip_url`, `total_amount`, `registered_at`, `title`, `first_name`, `last_name`, `gender`, `email`, `phone`, `line_id`, `thai_id`, `birth_date`, `disease`, `disease_detail`, `emergency_contact_name`, `emergency_contact_phone`) VALUES
+(2, 'RUN2025-FACF8E', NULL, 1, 76, 27, NULL, NULL, 'XL', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-20 21:46:21', 'นาย', 'จัตุรพร ', 'ประเทือง', 'ชาย', 'jaturapon.prat57@sskru.ac.th', '0649570093', NULL, '1330500313232', '1995-08-14', 'ไม่มีโรคประจำตัว', NULL, 'jaturaporn prathueang', '0649570093'),
+(3, 'RUN2025-2FBD49', NULL, 1, 75, 15, NULL, NULL, 'L', 'pickup', NULL, 'รอชำระเงิน', NULL, 599.00, '2025-11-20 22:20:08', 'นางสาว', 'สวิตตา', ' พงษ์คละ', 'หญิง', 'kks34090@khukhan.ac.th', '0834388970', NULL, '1330501474248', '2008-08-13', 'ไม่มีโรคประจำตัว', NULL, 'สน พงษ์คละ', '0610782577'),
+(4, 'RUN2025-42B292', NULL, 1, 76, 28, NULL, NULL, '', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-23 18:20:17', 'นาย', 'สมัย', 'นาบำรุง', 'ชาย', 'www.Samai_t105@hotmail.com', '0892250649', NULL, '3330500968219', '1979-07-13', 'ไม่มีโรคประจำตัว', NULL, 'คุณอำไพ สากล', '0870788131'),
+(5, 'RUN2025-0C7CF5', NULL, 1, 76, 27, NULL, NULL, 'L', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-24 21:36:24', 'นาย', 'สุชาติ', 'แสงธิ', 'ชาย', 'suchart2042@gmail.com', '0851023135', NULL, '1319800145554', '1995-07-26', 'ไม่มีโรคประจำตัว', NULL, '', ''),
+(6, 'RUN2025-48B16D', NULL, 1, 76, 26, NULL, NULL, 'M', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-24 21:39:46', 'นาย', 'กิตติ', 'อาจวิเชียร', 'ชาย', 'kitti.artwichian@gmail.com', '0910211512', NULL, '1330500370333', '1998-07-31', 'ไม่มีโรคประจำตัว', NULL, '', ''),
+(7, 'RUN2025-E8706A', NULL, 1, 76, 29, NULL, NULL, 'XL', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-24 21:47:34', 'นาย', 'สมคิด', 'นืลเพชร', 'ชาย', 'Somkidnil9@gmail.com', '0811856185', NULL, '3331400115240', '1966-11-30', 'ไม่มีโรคประจำตัว', NULL, '', ''),
+(8, 'RUN2025-758E4C', NULL, 2, 85, NULL, NULL, NULL, 'S', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-25 01:58:59', 'นาง', 'ออน', 'ถาพันธ์', 'หญิง', 'ontapan35@gmail.com', '0833038453', NULL, '3330501242424', '1962-10-15', 'ไม่มีโรคประจำตัว', NULL, 'วรรณพร', '0830825680'),
+(9, 'RUN2025-679E1B', NULL, 1, 76, 28, NULL, NULL, 'XL', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-26 07:16:55', 'นาย', 'มงคล', 'กระดานพล', 'ชาย', 'mongkol@khukhan.ac.th', '0827490163', NULL, '3330500800831', '1980-07-22', 'ไม่มีโรคประจำตัว', NULL, 'เจษวราภรณ์ กระดานพล', '0827490163'),
+(10, 'RUN2025-273582', NULL, 1, 76, 29, NULL, NULL, 'L', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-26 22:45:07', 'นาย', 'จรัญ', 'อุตสาหะ', 'ชาย', 'charan2022hasa@gmail.com', '0812024998', NULL, '3331001154641', '1973-10-27', 'ไม่มีโรคประจำตัว', NULL, 'รัตนา อุตสาหะ', '0812024998'),
+(11, 'RUN2025-5AC70A', 4, 1, 76, 31, NULL, NULL, 'S', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-28 02:26:57', 'นาง', 'สิริกัลยา', 'สุขขี', 'หญิง', 'sirikanlaya.s@sskru.ac.th', '0889152456', NULL, '3339900126752', '1982-11-10', 'ไม่มีโรคประจำตัว', NULL, 'นายพิศาล สุขขี', '0842982456'),
+(12, 'RUN2025-42BD01', NULL, 1, 76, 31, NULL, NULL, 'L', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-28 03:28:02', 'นาง', 'เพชรลดา', 'เพ็ชรงา', 'หญิง', 'pentiva1@gmail.com', '0827499654', NULL, '3330501068769', '1982-11-02', 'ไม่มีโรคประจำตัว', NULL, 'เพ็ญทิวา สารบุตร', '0879617951'),
+(13, 'RUN2025-521D27', NULL, 1, 76, 29, NULL, NULL, '', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-28 03:31:48', 'นาย', 'Somnuek', 'Prommajan', 'ชาย', 'kunic2804@gmail.com', '0814065545', NULL, '3330100231979', '1975-04-28', 'ไม่มีโรคประจำตัว', NULL, 'แซม', '0814065545'),
+(14, 'RUN2025-8C54DE', NULL, 1, 76, 28, NULL, NULL, 'L', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-28 05:23:37', 'นาย', 'จำเริญ', 'แก้วเล็ก', 'ชาย', 'jamrearnkeawlak@hotmail.com', '0850254924', NULL, '3330500394212', '1976-11-10', 'ไม่มีโรคประจำตัว', NULL, '0899471134', '0850254924'),
+(15, 'RUN2025-3A7C47', NULL, 2, 85, NULL, '', '', 'XL', 'pickup', NULL, 'รอชำระเงิน', 'uploads/slips/19f9aad2e174d9c17adb53de9e192228.png', 399.00, '2025-11-28 21:25:35', 'นาง', 'ศิริขวัญ', 'บุญจูง', 'หญิง', 'sirikhwan.bj@gmail.com', '0648933077', NULL, '3330501249631', '1977-04-10', 'ไม่มีโรคประจำตัว', NULL, 'sirikhwan.bj@gmail.com', '0648933077'),
+(16, 'RUN2025-6B39C3', NULL, 1, 76, 31, NULL, NULL, 'L', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-30 19:50:38', 'นางสาว', 'ณัฐยาพร', 'คำแพง', 'หญิง', 'wandeemath@gmail.com', '0945393514', NULL, '1330500017021', '1984-06-13', 'ไม่มีโรคประจำตัว', NULL, 'เจษวราภรณ์ ', '0894263811'),
+(17, 'RUN2025-D6FC1B', NULL, 1, 76, 28, NULL, NULL, 'L', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-11-30 21:17:38', 'นาย', 'อภิชาติ', 'ดวงมะณี', 'ชาย', 'sobsuanprueyai@outlook.co.th', '0884679384', NULL, '1330500063767', '1985-12-09', 'ไม่มีโรคประจำตัว', NULL, 'นายอภิชาติ ดวงมะณี', '0884679384'),
+(18, 'RUN2025-1728DE', NULL, 1, 76, 29, NULL, NULL, 'XL', 'pickup', NULL, 'รอชำระเงิน', NULL, 399.00, '2025-12-01 19:42:17', 'อื่นๆ', 'สุวิจักขณ์', 'สุวัชรโชคชัย', 'ชาย', 'love08877543210@gmail.com', '0805248855', NULL, '3141100050632', '1972-08-17', 'ไม่มีโรคประจำตัว', NULL, '', '');
 
 -- --------------------------------------------------------
 
@@ -478,6 +503,7 @@ CREATE TABLE `staff` (
   `password_hash` varchar(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `role` enum('admin','staff') NOT NULL,
+  `status` enum('active','inactive') DEFAULT 'active',
   `assigned_event_id` int(11) DEFAULT NULL COMMENT 'ID กิจกรรมที่รับผิดชอบ'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -485,10 +511,31 @@ CREATE TABLE `staff` (
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`id`, `username`, `password_hash`, `full_name`, `role`, `assigned_event_id`) VALUES
-(1, 'admin', '$2a$12$zk8PKOASddu96PjkItPoFu9JyLOZMeoC4gg4.BoVElSsBKyKtcss2', 'Super Admin', 'admin', NULL),
-(2, 'staff01', '$2y$10$BwkMzf3FPG1z46g.AvihFe3.aP.7wPIs0vM3ym6tKi4v9qYsdxgd2', 'คุณสมหญิง ใจดี', 'staff', 1),
-(3, 'staff02', '$2a$12$zk8PKOASddu96PjkItPoFu9JyLOZMeoC4gg4.BoVElSsBKyKtcss2', 'คุณอดิศักดิ์ แข็งแรง', 'staff', 2);
+INSERT INTO `staff` (`id`, `username`, `password_hash`, `full_name`, `role`, `status`, `assigned_event_id`) VALUES
+(1, 'admin', '$2a$12$zk8PKOASddu96PjkItPoFu9JyLOZMeoC4gg4.BoVElSsBKyKtcss2', 'Super Admin', 'admin', 'active', NULL),
+(2, 'staff01', '$2y$10$/jiSOO5t/6vnJTVLz5yxdedQdWtaFsspegqqYIoguIsiHKIzK.p7q', 'คุณสมหญิง ใจดี', 'staff', 'active', 1),
+(3, 'staff02', '$2a$12$zk8PKOASddu96PjkItPoFu9JyLOZMeoC4gg4.BoVElSsBKyKtcss2', 'คุณอดิศักดิ์ แข็งแรง', 'staff', 'active', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff_assignments`
+--
+
+CREATE TABLE `staff_assignments` (
+  `id` int(11) NOT NULL,
+  `staff_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `staff_assignments`
+--
+
+INSERT INTO `staff_assignments` (`id`, `staff_id`, `event_id`) VALUES
+(2, 3, 2),
+(8, 2, 2),
+(9, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -505,7 +552,7 @@ CREATE TABLE `users` (
   `last_name` varchar(255) NOT NULL,
   `gender` varchar(50) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
-  `thai_id` varchar(13) DEFAULT NULL,
+  `thai_id` varchar(20) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
   `line_id` varchar(100) DEFAULT NULL,
   `address` text DEFAULT NULL,
@@ -645,6 +692,14 @@ ALTER TABLE `staff`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Indexes for table `staff_assignments`
+--
+ALTER TABLE `staff_assignments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `staff_id` (`staff_id`),
+  ADD KEY `event_id` (`event_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -660,7 +715,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `distances`
 --
 ALTER TABLE `distances`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -732,7 +787,7 @@ ALTER TABLE `race_categories`
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `registration_data`
@@ -757,6 +812,12 @@ ALTER TABLE `slides`
 --
 ALTER TABLE `staff`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `staff_assignments`
+--
+ALTER TABLE `staff_assignments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
